@@ -11,7 +11,7 @@ const refs = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
-let startTimer = 0;
+let deadLine = 0;
 let timerId = null;
 
 function convertMs(ms) {
@@ -44,7 +44,7 @@ const options = {
       Notiflix.Notify.failure('Please choose a date in the future');
     }
 
-    startTimer = selectedDates[0].getTime();
+    deadLine = selectedDates[0].getTime();
     refs.button.removeAttribute('disabled');
   },
 };
@@ -59,15 +59,15 @@ refs.button.addEventListener('click', () => {
 });
 
 function start() {
-  intervalId = setInterval(() => {
-    const arrayTime = startTimer - Date.now();
-      const { days, hours, minutes, seconds } = convertMs(arrayTime);
-       if (convertMs(arrayTime) === 0) {
-         clearInterval(intervalId);
-       }
-    console.log({ days, hours, minutes, seconds });
-      render({ days, hours, minutes, seconds });
-     
+  timerId = setInterval(() => {
+    const arrayTime = deadLine - Date.now();
+    if (arrayTime <= 0) {
+      clearInterval(timerId);
+      console.log('Timer Stopped');
+    }
+    const { days, hours, minutes, seconds } = convertMs(arrayTime);
+    // console.log({ days, hours, minutes, seconds });
+    render({ days, hours, minutes, seconds });
   }, 1000);
 }
 

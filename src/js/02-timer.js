@@ -42,11 +42,12 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0] < Date.now()) {
       Notiflix.Notify.failure('Please choose a date in the future');
-    }
+    } else {
 
-    deadLine = selectedDates[0].getTime();
-    refs.button.removeAttribute('disabled');
-  },
+      deadLine = selectedDates[0].getTime();
+      refs.button.removeAttribute('disabled');
+    }
+},
 };
 
 flatpickr('#datetime-picker', options);

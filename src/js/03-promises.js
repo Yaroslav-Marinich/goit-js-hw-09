@@ -23,6 +23,7 @@ form.addEventListener('submit', formSubmit);
 function formSubmit(event) {
   event.preventDefault();
 
+let firstDelay = event.currentTarget.delay.value;
   let stepValue = event.currentTarget.step.value;
   let amountValue = event.currentTarget.amount.value;
 
@@ -39,5 +40,5 @@ function formSubmit(event) {
         );
       });
   }
-
+event.currentTarget.reset()
 }

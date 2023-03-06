@@ -40,6 +40,6 @@ function formSubmit(event) {
           );
         });
     }
-    event.currentTarget.reset()
   }, firstDelay);
+  event.currentTarget.reset();
 }

@@ -23,20 +23,21 @@ form.addEventListener('submit', formSubmit);
 function formSubmit(event) {
   event.preventDefault();
 
-  let firstDelay = event.currentTarget.delay.value;
-  let stepValue = event.currentTarget.step.value;
+  let firstDelay = Number(event.currentTarget.delay.value);
+  let stepValue = Number(event.currentTarget.step.value);
   let amountValue = event.currentTarget.amount.value;
   setTimeout(() => {
     for (let i = 1; i <= amountValue; i += 1) {
       createPromise(i, stepValue * i)
         .then(({ position, delay }) => {
+          console
           Notiflix.Notify.success(
-            `✅ Fulfilled promise ${position} in ${delay}ms`
+            `✅ Fulfilled promise ${position} in ${delay + firstDelay}ms`
           );
         })
         .catch(({ position, delay }) => {
           Notiflix.Notify.failure(
-            `❌ Rejected promise ${position} in ${delay}ms`
+            `❌ Rejected promise ${position} in ${delay + firstDelay}ms`
           );
         });
     }

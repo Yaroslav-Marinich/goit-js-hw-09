@@ -65,10 +65,11 @@ function start() {
     if (arrayTime <= 0) {
       clearInterval(timerId);
       console.log('Timer Stopped');
+    } else {
+      const { days, hours, minutes, seconds } = convertMs(arrayTime);
+      // console.log({ days, hours, minutes, seconds });
+      render({ days, hours, minutes, seconds });
     }
-    const { days, hours, minutes, seconds } = convertMs(arrayTime);
-    // console.log({ days, hours, minutes, seconds });
-    render({ days, hours, minutes, seconds });
   }, 1000);
 }
 

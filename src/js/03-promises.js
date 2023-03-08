@@ -24,23 +24,22 @@ function formSubmit(event) {
   event.preventDefault();
 
   let firstDelay = Number(event.currentTarget.delay.value);
-  let stepValue = Number(event.currentTarget.step.value);
-  let amountValue = event.currentTarget.amount.value;
-  setTimeout(() => {
-    for (let i = 1; i <= amountValue; i += 1) {
-      createPromise(i, stepValue * i)
+  const stepValue = Number(event.currentTarget.step.value);
+  const amountValue = Number(event.currentTarget.amount.value);
+  // setTimeout(() => {
+    for (let i = 0; i < amountValue; i += 1) {
+      createPromise(i + 1, firstDelay + i * stepValue)
         .then(({ position, delay }) => {
-          console
           Notiflix.Notify.success(
-            `✅ Fulfilled promise ${position} in ${delay + firstDelay}ms`
+            `✅ Fulfilled promise ${position} in ${delay}ms`
           );
         })
         .catch(({ position, delay }) => {
           Notiflix.Notify.failure(
-            `❌ Rejected promise ${position} in ${delay + firstDelay}ms`
+            `❌ Rejected promise ${position} in ${delay}ms`
           );
         });
     }
-  }, firstDelay);
+  // }, firstDelay);
   event.currentTarget.reset();
 }
